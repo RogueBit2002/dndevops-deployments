@@ -1,0 +1,35 @@
+services:
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+  
+  rabbitmq:
+    image: rabbitmq:4.2.1-management
+    environment:
+      RABBITMQ_DEFAULT_USER: service
+      RABBITMQ_DEFAULT_PASS: password
+
+  mailpit:
+    image: axllent/mailpit:latest
+
+  db:
+    image: postgres:18.1
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dndevops
+    volumes:
+      - ./persist/postgresql:/var/lib/postgresql
+
+  # App
+  dndevops:
+    image: ghcr.io/roguebit2002/dndevops:latest
+    environment:
+      AMQP_URI: amqp://rabbit:carrot@rabbitmq
+      POSTGRESQL_URI: postgres://service:password@db/dndevops
+
