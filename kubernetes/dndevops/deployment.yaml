@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dndevops-app
+  namespace: dndevops
+  labels:
+    app: dndevops
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dndevops
+  template:
+    metadata:
+      labels:
+        app: dndevops
+    spec:
+      containers:
+        - name: dndevops
+          image: ghcr.io/roguebit2002/dndevops:0.0.1
+          ports:
+            - containerPort: 8000
