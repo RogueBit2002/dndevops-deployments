@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: dndevops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:4.2.1-management # You can use any version you need
+        env:
+          - name: RABBITMQ_DEFAULT_USER
+            value: "admin" # Your desired username
+          - name: RABBITMQ_DEFAULT_PASS
+            value: "secret" # Your desired password
+        ports:
+        - containerPort: 5672
+        - containerPort: 5671
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-service
+  namespace: dndevops
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
+    - protocol: TCP
+      port: 5671
+      targetPort: 5671
+  clusterIP: None  # Headless service
