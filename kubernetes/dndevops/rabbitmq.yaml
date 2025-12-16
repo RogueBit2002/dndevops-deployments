@@ -24,7 +24,9 @@ spec:
             value: "secret" # Your desired password
         ports:
         - containerPort: 5672
+          name: "Default"
         - containerPort: 5671
+          name: "TLS"
 ---
 apiVersion: v1
 kind: Service
@@ -38,7 +40,9 @@ spec:
     - protocol: TCP
       port: 5672
       targetPort: 5672
+      name: "Default"
     - protocol: TCP
       port: 5671
       targetPort: 5671
+      name: "TLS"
   clusterIP: None  # Headless service
