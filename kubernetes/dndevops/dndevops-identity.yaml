@@ -26,14 +26,24 @@ spec:
             - name: DNDEVOPS_ADMINS
               value: admin@dndevops.dev
             - name: DNDEVOPS_JWT_SECRET
-              value: 1234hvp
+              value: Youshouldprobablynotdothis
             - name: DNDEVOPS_SMTP_URI
               value: smtp://user:password@smtp-service
             - name: DNDEVOPS_SMTP_SENDER
               value: dndevops@company.com
             - name: DNDEVOPS_AMQP_URI
               value: amqp://user:password@amqp-service
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pg-login
+                  key: USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: pg-login
+                  key: PASSWORD
             - name: DNDEVOPS_IDENTITY_POSTGRES_URI
-              value: postgres://user:password@dndevops-demo-db.postgres.database.azure.com/
+              value: postgres://${DB_USER}:${DB_PASS}@dndevops-demo-db.postgres.database.azure.com/
             
 
