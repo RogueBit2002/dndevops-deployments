@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dndevops-identity
+  namespace: dndevops
+  labels:
+    app: dndevops-identity
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dndevops-identity
+  template:
+    metadata:
+      labels:
+        app: dndevops-identity
+    spec:
+      containers:
+        - name: dndevops-identity
+          image: ghcr.io/roguebit2002/dndevops:latest-dev
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DNDEVOPS_DEPLOYMENT
+              value: identity
+            - name: DNDEVOPS_ADMINS
+              value: admin@dndevops.dev
+            - name: DNDEVOPS_JWT_SECRET
+              value: 1234hvp
+            - name: DNDEVOPS_SMTP_URI
+              value: smtp://user:password@smtp-service
+            - name: DNDEVOPS_SMTP_SENDER
+              value: dndevops@company.com
+            - name: DNDEVOPS_AMQP_URI
+              value: amqp://user:password@amqp-service
+            - name: DNDEVOPS_IDENTITY_POSTGRES_URI
+              value: postgres://user:password@dndevops-demo-db.postgres.database.azure.com/
+            
+

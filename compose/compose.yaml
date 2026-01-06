@@ -22,8 +22,8 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: dndevops
     volumes:
+      - ./init-dbs.sql:/docker-entrypoint-initdb.d/init-dbs.sql
       - ./persist/postgresql:/var/lib/postgresql
 
   # App
@@ -32,4 +32,3 @@ services:
     environment:
       AMQP_URI: amqp://rabbit:carrot@rabbitmq
       POSTGRESQL_URI: postgres://service:password@db/dndevops
-

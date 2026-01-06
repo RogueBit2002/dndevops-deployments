@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS "dndevops-identity";
+CREATE DATABASE IF NOT EXISTS "dndevops-game";
+CREATE DATABASE IF NOT EXISTS "dndevops-events";
