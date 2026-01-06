@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - dndevops-identity.yaml
-  #- dndevops-game.yaml
-  #- dndevops-events.yaml
-  #- dndevops-frontend.yaml
+  - dndevops-game.yaml
+  - dndevops-events.yaml
+  - dndevops-frontend.yaml
   - amqp.yaml
   - smtp.yaml
   - pg-login.yaml
