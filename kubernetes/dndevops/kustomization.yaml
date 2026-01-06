@@ -8,4 +8,4 @@ resources:
   #- dndevops-frontend.yaml
   - amqp.yaml
   - smtp.yaml
-  - test-secret.yaml
+  #- test-secret.yaml
