@@ -44,6 +44,6 @@ spec:
                   name: pg-login
                   key: PASSWORD
             - name: DNDEVOPS_IDENTITY_POSTGRES_URI
-              value: postgres://$(DB_USER):$(DB_PASS)@dndevops-demo-db.postgres.database.azure.com/identity
+              value: postgres://$(DB_USER):$(DB_PASS)@dndevops-demo-db.postgres.database.azure.com/dndevops-identity
             
 
