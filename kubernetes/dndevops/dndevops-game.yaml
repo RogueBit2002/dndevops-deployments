@@ -45,3 +45,33 @@ spec:
                   key: PASSWORD
             - name: DNDEVOPS_GAME_POSTGRES_URI
               value: postgres://$(DB_USER):$(DB_PASS)@dndevops-demo-db.postgres.database.azure.com/dndevops-game
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dndevops-game-service
+  namespace: dndevops
+spec:
+  selector:
+    app: dndevops-game
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      name: "http"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dndevops-game-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/game
+            pathType: Prefix
+            backend:
+              service:
+                name: dndevops-game-service
+                port:
+                  number: 80

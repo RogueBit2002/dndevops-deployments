@@ -23,3 +23,33 @@ spec:
           env:
             - name: DNDEVOPS_DEPLOYMENT
               value: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dndevops-frontend-service
+  namespace: dndevops
+spec:
+  selector:
+    app: dndevops-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      name: "http"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dndevops-frontend-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dndevops-frontend-service
+                port:
+                  number: 80
