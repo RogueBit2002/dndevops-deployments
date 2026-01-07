@@ -42,6 +42,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: dndevops-frontend-ingress
+  namespace: dndevops
 spec:
   rules:
     - http:
