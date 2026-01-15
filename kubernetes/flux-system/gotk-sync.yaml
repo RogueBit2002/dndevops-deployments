@@ -11,7 +11,7 @@ spec:
     branch: main
   secretRef:
     name: flux-system
-  url: ssh://git@github.com/RogueBit2002/dndevops-deployments.git
+  url: https://github.com/RogueBit2002/dndevops-deployments.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
